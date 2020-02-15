@@ -66,11 +66,19 @@ class Control(object):
 		if abs(self.x_stick) > 0.1:
 			#self.c.write(bytearray('lu\r', 'utf-8'))
 			self.desired[0] += 2.0 * self.x_stick
+			if self.desired[0] > SCREEN_SIZE[0]:
+				self.desired[0] = SCREEN_SIZE[0]
+			elif self.desired[0] < 0:
+				self.desired[0] = 0
 
 		self.y_stick = self.joy.get_axis(1)
 		if abs(self.y_stick) > 0.1:
 			#self.c.write(bytearray('ru\r', 'utf-8'))
 			self.desired[1] += 2.0 * self.y_stick
+			if self.desired[1] > SCREEN_SIZE[1]:
+				self.desired[1] = SCREEN_SIZE[1]
+			elif self.desired[1] < 0:
+				self.desired[1] = 0
 
 	def draw(self):
 		#draw background 
